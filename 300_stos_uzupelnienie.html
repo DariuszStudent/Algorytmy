@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100</title>
+</head>
+
+<body style="background-color: black;">
+    <script>
+        // implementacja stosu, ze śledzeniem wysokości
+        class Stos {
+            constructor() {
+                this.wierzch = null
+                this.wysokość = 0
+            }
+            połóż(wartość) {
+                let nowyWierzch = {
+                    dane: wartość,
+                    ref: this.wierzch
+                }
+                this.wierzch = nowyWierzch
+                this.wysokość += 1
+            }
+            zdejmij() {
+                let staryWierzch = this.wierzch
+                if (staryWierzch != null) {
+                    this.wierzch = staryWierzch.ref
+                    this.wysokość -= 1
+                    return staryWierzch.dane
+                }
+                else
+                    return null
+            }
+            podejrzyj() {
+                if (this.wierzch != null)
+                    return this.wierzch.dane
+                else
+                    return null
+            }
+        }
+
+        // walidacja 2 rodzajów nawiasów
+        function walidujNawiasy(input) {
+            let stos = new Stos()
+            for (let znak of input) {
+                if (znak == "(")
+                    stos.połóż("okr")
+                else if (znak == ")") {
+                    if (stos.zdejmij() != "okr")
+                        return false
+                }
+                else if (znak == "[")
+                    stos.połóż("pro")
+                else if (znak == "]") {
+                    if (stos.zdejmij() != "pro")
+                        return false
+                }
+            }
+            if (stos.podejrzyj() != null)
+                return false
+            else
+                return true
+        }
+        // walidujNawiasy("([)]") //false
+        // walidujNawiasy("([])") //true
+
+        //walidacja wielu rodzajów nawiasów z użyciem słowników
+        const otw = {
+            "(": "okr",
+            "[": "pro",
+            "{": "kla",
+            "<": "ost"
+        }
+        const zam = {
+            ")": "okr",
+            "]": "pro",
+            "}": "kla",
+            ">": "ost"
+        }
+        function walidujNawiasy(input) {
+            let stos = new Stos()
+            for (let znak of input) {
+                if (otw[znak] != undefined) // sprawdzamy czy słownik otw zawiera klucz przechowywany w zmiennej znak - czyli nasz znak jest otwarciem bloku nawiasów
+                    stos.połóż(otw[znak]) // kładziemy wartość ze słownika na stosie
+                else if (zam[znak] != undefined) // sprawdzamy czy słownik zam zawiera klucz przechowywany w zmiennej znak - czyli nasz znak jest zamknięciem bloku nawiasów
+                    if (stos.zdejmij() != zam[znak]) // sprawdzamy zgodność typu nawiasów
+                        return false
+            }
+            if (stos.podejrzyj() != null)
+                return false
+            else
+                return true
+        }
+
+        //walidacja cudzysłowów z użyciem słownika
+        const cudzysłowy = {
+            "\"": "podw",
+            "'": "poj",
+            "|": "abs"
+        }
+
+        function walidujCudzysłowy(input) {
+            let stos = new Stos()
+            for (let znak of input) {
+                if (cudzysłowy[znak] != undefined) // jeśli wartość ze zmiennej znak jest kluczem w słowniku cudzysłowy
+                    if (cudzysłowy[znak] == stos.podejrzyj()) // jeśli nazwa cudzysłowu na wierzchu stosu jest zgodna z tą ze słownika
+                        stos.zdejmij() // to zdejmujemy, czyli zamykamy cudzysłów
+                    else // wpp
+                        stos.połóż(cudzysłowy[znak]) // otwieramy cudzysłów, czyli zostawiamy nazwę na stosie
+            }
+            if (stos.podejrzyj() != null)
+                return false
+            else
+                return true
+        }
+
+        //walidacja cudzysłowów z użyciem zbioru
+        const zbiór = {
+            "\"": true,
+            "'": true,
+            "|": true
+        }
+        function walidujCudzysłowy(input) {
+            let stos = new Stos()
+            for (let znak of input) {
+                if (zbiór[znak]) // sprawdzamy czy znak jest w zbiorze
+                    if (znak == stos.podejrzyj())
+                        stos.zdejmij()
+                    else
+                        stos.połóż(znak)
+            }
+            if (stos.podejrzyj() != null)
+                return false
+            else
+                return true
+        }
+
+        // //test walidacji cudzysłowów
+        // walidujCudzysłowy(`"'|"'|`) //false
+        // walidujCudzysłowy(`"'||'"`) //true
+        // walidujCudzysłowy(`""||''`) //true
+    </script>
+</body>
+
+</html>

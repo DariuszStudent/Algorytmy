@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100</title>
+</head>
+
+<body style="background-color: black;">
+    <script>
+        class stos {
+            constructor() {
+                this.wierzch = null
+            }
+            peek() {
+                if (this.wierzch == null)
+                    return null
+                else
+                    return this.wierzch.dane
+            }
+            push(input) {
+                let nowy = {
+                    dane: input,
+                    ref: this.wierzch
+                }
+                this.wierzch = nowy
+            }
+            pop() {
+                if (this.wierzch == null)
+                    return null
+                else {
+                    let stary = this.wierzch
+                    this.wierzch = stary.ref
+                    return stary.dane
+                }
+            }
+        }
+
+        function walidujNawiasy001(input) {
+            let stosik = new stos()
+            for (let znak of input) {
+                if (znak == "(")
+                    stosik.push("OKR")
+                else if (znak == ")") {
+                    if (stosik.pop() != "OKR")
+                        return false
+                }
+            }
+            if (stosik.peek() != null)
+                return false
+            else
+                return true
+        }
+
+
+        // walidujNawiasy001("()")
+        // true
+        // walidujNawiasy001("())")
+        // false
+
+
+        function walidujNawiasy002(input) {
+            let stosik = new stos()
+            for (let znak of input) {
+                if (znak == "(")
+                    stosik.push("OKR")
+                else if (znak == ")") {
+                    if (stosik.pop() != "OKR")
+                        return false
+                }
+                else if (znak == "[")
+                    stosik.push("OKR")
+                else if (znak == "]") {
+                    if (stosik.pop() != "OKR")
+                        return false
+                }
+            }
+            if (stosik.peek() != null)
+                return false
+            else
+                return true
+        }
+
+        // walidujNawiasy002("())")
+        // false
+        // walidujNawiasy002("()[]")
+        // true
+        // walidujNawiasy002("()[]]")
+        // false
+    </script>
+</body>
+
+</html>

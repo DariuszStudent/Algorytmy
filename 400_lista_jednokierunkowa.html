@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do szkoły</title>
+</head>
+
+<body style="background-color: black;">
+
+    <script>
+        //lista jednokierunkowa
+        class Lista {
+            constructor() {
+                this.początek = null
+            }
+            dodajPoczątek(wartość) {
+                let nowyPoczątek = {
+                    dane: wartość,
+                    ref: this.początek
+                }
+                this.początek = nowyPoczątek
+            }
+            usuńPoczątek() {
+                let staryPoczątek = this.początek
+                if (staryPoczątek != null) {
+                    this.początek = staryPoczątek.ref
+                    return staryPoczątek.dane
+                }
+                else
+                    return null
+            }
+            podejrzyjPoczątek() {
+                if (this.początek != null)
+                    return this.początek.dane
+                else
+                    return null
+            }
+            znajdźKoniec() {
+                let bieżący = this.początek
+                if (bieżący == null)
+                    return null
+                else
+                    while (bieżący.ref != null)
+                        bieżący = bieżący.ref
+                return bieżący
+            }
+            dodajKoniec(wartość) {
+                let staryKoniec = this.znajdźKoniec()
+                if (staryKoniec == null)
+                    return this.dodajPoczątek(wartość)
+
+                let nowyKoniec = {
+                    dane: wartość,
+                    ref: null
+                }
+                staryKoniec.ref = nowyKoniec
+            }
+            podejrzyjKoniec() {
+                let koniec = this.znajdźKoniec()
+                if (koniec == null)
+                    return null
+                else
+                    return koniec.dane
+            }
+        }
+    </script>
+</body>
+
+</html>
