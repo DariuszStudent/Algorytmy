@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do szkoły</title>
+</head>
+
+<body style="background-color: black;">
+
+    <script>
+        class ListaDwukierunkowa {
+            constructor() {
+                this.początek = null
+                this.koniec = null
+            }
+            dodajPoczątek(input) {
+                let nowy = {
+                    dane: input,
+                    pop: null,
+                    nast: this.początek
+                }
+                if (this.początek == null)
+                    this.koniec = nowy
+                else
+                    this.początek.pop = nowy
+                this.początek = nowy
+            }
+            czytajPoczątek() {
+                if (this.początek == null)
+                    return undefined
+                else
+                    return this.początek.dane
+            }
+            usuńPoczątek() {
+                let stary = this.początek
+                if (stary == null)
+                    return undefined
+                else if (stary.nast == null)
+                    this.koniec = null
+                else
+                    stary.nast.pop = null
+                this.początek = stary.nast
+            }
+            dodajKoniec(input) {
+                let nowy = {
+                    dane: input,
+                    pop: this.koniec,
+                    nast: null
+                }
+                if (this.koniec == null)
+                    this.początek = nowy
+                else
+                    this.koniec.nast = nowy
+                this.koniec = nowy
+            }
+            czytajKoniec() {
+                if (this.koniec == null)
+                    return undefined
+                else
+                    return this.koniec.dane
+            }
+            usuńKoniec() {
+                let stary = this.koniec
+                if (stary == null)
+                    return undefined
+                else if (stary.pop == null) //lista jednoelementowa
+                    this.początek = null
+                else
+                    stary.pop.nast = null
+                this.koniec = stary.pop
+                return stary.dane
+            }
+            szukajElement(dane) {
+                let bieżący = this.początek
+                while (bieżący != null) {
+                    if (bieżący.dane == dane)
+                        return bieżący
+                    bieżący = bieżący.nast
+                }
+                return null
+            }
+            sortowanieBąbelkowe() {
+                if (this.początek == null || this.początek.nast == null) //lista pusta lub jednoelementowa
+                    return;
+                let sortujDalej = true
+                while (sortujDalej) {
+                    sortujDalej = false
+                    let
+                        lewy = this.początek,
+                        prawy = lewy.nast
+                    while (prawy != null) {
+                        if (lewy.dane > prawy.dane) {
+                            let temp = lewy.dane
+                            lewy.dane = prawy.dane
+                            prawy.dane = temp
+                            sortujDalej = true
+                        }
+                        lewy = prawy
+                        prawy = prawy.nast
+                    }
+                }
+            }
+        }
+
+
+        let dwukierunkowa = new ListaDwukierunkowa()
+        // dwukierunkowa.dodajPoczątek("a")
+        // dwukierunkowa.dodajPoczątek("b")
+        // dwukierunkowa.dodajPoczątek("c")
+        // dwukierunkowa.dodajPoczątek("d")
+        // dwukierunkowa.dodajPoczątek("e")
+        // dwukierunkowa.dodajPoczątek("f")
+        // dwukierunkowa
+
+
+        // dwukierunkowa.dodajKoniec("a")
+        // dwukierunkowa.dodajKoniec("b")
+        // dwukierunkowa.dodajKoniec("c")
+        // dwukierunkowa.dodajKoniec("d")
+        // dwukierunkowa.dodajKoniec("e")
+        // dwukierunkowa
+
+        // dwukierunkowa.dodajKoniec("a")
+        // dwukierunkowa.dodajKoniec("b")
+        // dwukierunkowa.dodajKoniec("c")
+        // dwukierunkowa.dodajKoniec("d")
+        // dwukierunkowa.dodajKoniec("e")
+        // dwukierunkowa.szukajElement("c") // znajduje
+        // dwukierunkowa.szukajElement("f") // null
+
+        // dwukierunkowa.dodajKoniec(12)
+        // dwukierunkowa.dodajKoniec(1)
+        // dwukierunkowa.dodajKoniec(7)
+        // dwukierunkowa.dodajKoniec(8)
+        // dwukierunkowa.dodajKoniec(6)
+        // dwukierunkowa.dodajKoniec(11)
+        // dwukierunkowa.dodajKoniec(10)
+        // dwukierunkowa
+        // dwukierunkowa.sortowanieBąbelkowe()
+        // dwukierunkowa
+
+
+
+    </script>
+</body>
+
+</html>

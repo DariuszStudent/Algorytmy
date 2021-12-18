@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do szkoły</title>
+</head>
+
+<body style="background-color: black;">
+
+    <script>
+        //cwiczenie: sprawdzić czy w tablicy jest duplikat
+        let tablica = [1, 3, 67, 89, 5, 8, 9, 0, 1]
+        let zbiór = {}
+        function sprawdźDuplikat(tablica) {
+            let zbiór = {}
+            for (let komórka of tablica) {
+                if (zbiór[komórka])
+                    return true
+                zbiór[komórka] = true
+            }
+            return false
+        }
+        // sprawdźDuplikat(tablica)
+    </script>
+</body>
+
+</html>

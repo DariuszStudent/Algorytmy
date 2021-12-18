@@ -5,64 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do szkoły</title>
+    <title>100</title>
 </head>
 
 <body style="background-color: black;">
-
     <script>
-        let zmienna = "napis"
-        const stala = "stala"
-
-        const tablica = []
-
-        tablicz = "napis"
-        'napis'
-        function nazwaFunckji(param, param = "wart")
-        return
-
-        let wypiszWKonsli = console.log
-
-        // wypiszWKonsli("TEST")
-
-        let zmienna = "nas"
-
-        let obj = {
-            klucz: 123,
-            "^$#": "wartosc"
-        }
-
-        // wypiszWKonsli(obj)
-
-        // obj.klucz
-        // 123
-
-        // obj["^$#"]
-        // 'wartosc'
-        // wypiszWKonsli(obj["^$#"]
-
-        let mojKlucz = "klucz"
-
-        // obj[mojKlucz]
-        // 123
-        let mojklucz = "^$@#"
-
-        // obj[mojKlucz]
-        // 123
-
-        class nazwaKlasy {
-            constructor(param) {
-                this.naszePole = param
-            }
-            metoda() {
-                console.log(this.naszePole)
-            }
-        }
-
-        let instacja = new nazwaKlasy("cokolwiek")
-
-        // instacja.metoda()
-
         class stos {
             constructor() {
                 this.wierzch = null
@@ -91,6 +38,28 @@
             }
         }
 
+        function walidujNawiasy001(input) {
+            let stosik = new stos()
+            for (let znak of input) {
+                if (znak == "(")
+                    stosik.push("OKR")
+                else if (znak == ")") {
+                    if (stosik.pop() != "OKR")
+                        return false
+                }
+            }
+            if (stosik.peek() != null)
+                return false
+            else
+                return true
+        }
+
+        // ////////////////////////////////////////////////// do użycia w konsoli
+        // walidujNawiasy001("()")
+        // true
+        // walidujNawiasy001("())")
+        // false
+        // //////////////////////////////////////////////////
     </script>
 </body>
 

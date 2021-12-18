@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do szkoły</title>
+</head>
+
+<body style="background-color: black;">
+
+    <script>
+        class Lista {
+            constructor() {
+                this.początek = null
+            }
+            dodajPoczątek(wartość) {
+                let nowyPoczątek = {
+                    dane: wartość,
+                    ref: this.początek
+                }
+                this.początek = nowyPoczątek
+            }
+            usuńPoczątek() {
+                let staryPoczątek = this.początek
+                if (staryPoczątek != null) {
+                    this.początek = staryPoczątek.ref
+                    return staryPoczątek.dane
+                }
+                else
+                    return null
+            }
+            podejrzyjPoczątek() {
+                if (this.początek != null)
+                    return this.początek.dane
+                else
+                    return null
+            }
+            znajdźKoniec() {
+                let bieżący = this.początek
+                if (bieżący == null)
+                    return null
+                else
+                    while (bieżący.ref != null)
+                        bieżący = bieżący.ref
+                return bieżący
+            }
+            dodajKoniec(wartość) {
+                let staryKoniec = this.znajdźKoniec()
+                if (staryKoniec == null)
+                    return this.dodajPoczątek(wartość)
+
+                let nowyKoniec = {
+                    dane: wartość,
+                    ref: null
+                }
+                staryKoniec.ref = nowyKoniec
+            }
+            podejrzyjKoniec() {
+                let koniec = this.znajdźKoniec()
+                if (koniec == null)
+                    return null
+                else
+                    return koniec.dane
+            }
+            odwróć() {
+                if (this.początek == null || this.początek.ref == null)
+                    return;
+                let
+                    lewy = null,
+                    środkowy = this.początek,
+                    prawy = środkowy.ref
+                while (true) {
+                    środkowy.ref = lewy
+                    if (prawy == null)
+                        break
+                    lewy = środkowy
+                    środkowy = prawy
+                    prawy = prawy.ref
+                    console.log("lewy:", lewy, "środek:", środkowy, "prawy:", prawy)
+                }
+                this.początek = środkowy
+            }
+        }
+
+        // ////////////////////////////////////////////////// do użycia w konsoli
+        // let lista = new Lista()
+        // lista.dodajKoniec("a")
+        // lista.dodajKoniec("b")
+        // lista.dodajKoniec("c")
+        // lista.dodajKoniec("d")
+        // //////////////////////////////////////////////////
+
+
+        //test prędkość operacji dodawania elementów z dwóch końców
+        //początek
+        let lista1 = new Lista()
+
+        let start1 = Date.now()
+        for (let k = 0; k < 10000; k++)
+            lista1.dodajPoczątek(k)
+        console.log(`wykonaliśmy w czasie ${Date.now() - start1} milisekund`)
+
+        //koniec
+        let lista2 = new Lista()
+
+        let start2 = Date.now()
+        for (let k = 0; k < 10000; k++)
+            lista2.dodajKoniec(k)
+        console.log(`wykonaliśmy w czasie ${Date.now() - start2} milisekund`)
+
+
+    </script>
+</body>
+
+</html>

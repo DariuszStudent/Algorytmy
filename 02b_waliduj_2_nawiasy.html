@@ -38,29 +38,6 @@
             }
         }
 
-        function walidujNawiasy001(input) {
-            let stosik = new stos()
-            for (let znak of input) {
-                if (znak == "(")
-                    stosik.push("OKR")
-                else if (znak == ")") {
-                    if (stosik.pop() != "OKR")
-                        return false
-                }
-            }
-            if (stosik.peek() != null)
-                return false
-            else
-                return true
-        }
-
-
-        // walidujNawiasy001("()")
-        // true
-        // walidujNawiasy001("())")
-        // false
-
-
         function walidujNawiasy002(input) {
             let stosik = new stos()
             for (let znak of input) {
@@ -83,12 +60,15 @@
                 return true
         }
 
+        // ////////////////////////////////////////////////// do użycia w konsoli
         // walidujNawiasy002("())")
         // false
         // walidujNawiasy002("()[]")
         // true
         // walidujNawiasy002("()[]]")
         // false
+        // //////////////////////////////////////////////////
+
     </script>
 </body>
 

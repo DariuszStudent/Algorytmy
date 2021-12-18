@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100</title>
+</head>
+
+<body style="background-color: black;">
+    <script>
+        // implementacja stosu, ze śledzeniem wysokości
+        class Stos {
+            constructor() {
+                this.wierzch = null
+                this.wysokość = 0
+            }
+            połóż(wartość) {
+                let nowyWierzch = {
+                    dane: wartość,
+                    ref: this.wierzch
+                }
+                this.wierzch = nowyWierzch
+                this.wysokość += 1
+            }
+            zdejmij() {
+                let staryWierzch = this.wierzch
+                if (staryWierzch != null) {
+                    this.wierzch = staryWierzch.ref
+                    this.wysokość -= 1
+                    return staryWierzch.dane
+                }
+                else
+                    return null
+            }
+            podejrzyj() {
+                if (this.wierzch != null)
+                    return this.wierzch.dane
+                else
+                    return null
+            }
+        }
+
+        //walidacja cudzysłowów z użyciem słownika
+        const cudzysłowy = {
+            "\"": "podw",
+            "'": "poj",
+            "|": "abs"
+        }
+
+        function walidujCudzysłowy(input) {
+            let stos = new Stos()
+            for (let znak of input) {
+                if (cudzysłowy[znak] != undefined) // jeśli wartość ze zmiennej znak jest kluczem w słowniku cudzysłowy
+                    if (cudzysłowy[znak] == stos.podejrzyj()) // jeśli nazwa cudzysłowu na wierzchu stosu jest zgodna z tą ze słownika
+                        stos.zdejmij() // to zdejmujemy, czyli zamykamy cudzysłów
+                    else // wpp
+                        stos.połóż(cudzysłowy[znak]) // otwieramy cudzysłów, czyli zostawiamy nazwę na stosie
+            }
+            if (stos.podejrzyj() != null)
+                return false
+            else
+                return true
+        }
+
+        // ////////////////////////////////////////////////// do użycia w konsoli
+        // walidujCudzysłowy("'\"''")
+        // false
+        // walidujCudzysłowy("''\"''")
+        // false
+        // walidujCudzysłowy("''\"\"''")
+        // true
+        // walidujCudzysłowy(`''\"\"||''`)
+        // true
+        // walidujCudzysłowy(`''""||''`)
+        // true
+        // walidujCudzysłowy(`''""||'`)
+        // false
+        // walidujCudzysłowy(`''""|'|'`)
+        // false
+        // walidujCudzysłowy(`''""'||'`)
+        // true
+        // ////////////////////////////////////////////////// 
+    </script>
+</body>
+
+</html>
