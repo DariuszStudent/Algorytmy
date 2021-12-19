@@ -1,0 +1,40 @@
+Znajdowanie wspólnych dzielników dwóch liczb
+Implementacja stosu: metody push, pop i peek
+Walidacja nawiasów dwóch i więcej rodzajów - zwracamy true, gdy nawiasy są poprawnie domknięte i false, jeśli występuje jeden z błędów
+pozostały niedomknięte nawiasy
+najpierw zamykamy a potem otwieramy dany nawias
+zamykamy nawias nie mając nic otwartego lub w złej kolejności (zazębianie)
+Walidacja cudzysłowów (ten sam znak otwiera i zamyka blok) co najmniej 2 rodzajów. Uznajemy, że jeśli natrafiony znak zgadza się z ostatnio otwieranym i niezamkniętym blokiem, to zamykamy blok. W przeciwnym wypadku otwieramy. Na koniec zwracamy false jeśli pozostały niedomknięte bloki
+to samo ale conajmniej 3 rodzaje bloków - używamy np | lub * jako znaków otwierających i zamykających inny rodzaj bloku
+Walidacja nawiasów 3 rodzajów ({}, [] i ()) z dodatkową regułą o kolejności: najbardziej wewnętrznym nawiasem jest zawsze () (nie możemy mieć [] ani {} bez () w środku) oraz musi być on zawsze obejmowany przez [], a ten zawsze przez {}, a ten zawsze przez (). Niepoprawne są więc:
+[]
+{}
+{()}
+([()])
+[{[()]}]
+Implementacja listy jednokierunkowej bez referencji na koniec: metody AddFirst, ReadFirst, Remove First oraz AddLast, ReadLast, RemoveLast
+Implementacja listy jednokierunkowej z referencją bezpośrednio na koniec, metody jak w 5
+Implementacja listy dwukierunkowej, metody jak w 5 i 6
+Implementacja metody losowego odczytu dla list 5-7
+Znaleźć środek listy nie używając indeksu
+Zaimplementować listę z wewnętrznym wskaźnikiem, którego użyjemy przy losowym odczycie do sprawniejszego poruszania się
+jeśli żądany indeks jest równy, o jeden mniejszy lub o jeden większy od ostatnio używanego to korzystamy z wewnętrznego wskaźnika (to jest przestawiamy go)
+używamy wewnętrznego wskaźnika za każdym razem gdy do danego indeksu droga jest z niego najbliższa - czyli rozpatrujemy 4 przypadki:
+idziemy od początku po następnikach,
+idziemy od wewnętrznego wskaźnika po poprzednikach,
+idziemy od wewnętrznego wskaźnika po następnikach,
+idziemy od końca po poprzednikach
+Zrobić metodę odwracającą kierunek listy
+Zrobić sortowanie na liście
+bąbelkowe przestawiając dane
+przez wstawienie, przestawiając referencje
+Zrobić na liście ustawianie danych pod wskazanym indeksem
+Zrobić na liście wstawianie danych/węzła pod wskazanym indeksem
+Zrobić znajdowanie wartości na liście tj szukamy danych zgodnych z inputem i zwracamy indeks albo cały element
+Zrobić wstawianie listy do innej listy pod wskazanym indeksem
+można też zrobić wstawienie na początku i na końcu jako osobne funkcje
+Zrobić generowanie nowej listy z wyciętych elementów innej listy spomiędzy wskazanych indeksów
+Napisać implementację drzewa BST, w której będziemy pilnować unikalności kluczy (wystarczy metoda dodająca klucz)
+Napisać implementację drzewa BST, w której węzeł ma stowarzyszoną z kluczem (po którym porządkujemy drzewo) wartość/dane
+Dla implementacji z pkt 20 napisać metodę, która znajduje węzeł zawierający poszukiwane dane. Do realizacji potrzebujemy znajdowania następnika węzła i metod z tym związanych.
+* Zrobić przeszukiwanie drzewa wszerz
